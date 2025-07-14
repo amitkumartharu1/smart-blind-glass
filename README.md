@@ -1,49 +1,29 @@
 # smart-blind-glass
-const int trigPin = 9;
-const int echoPin = 10;
-const int motorPin = 6; // connected directly to vibration motor
+Smart Blind Glass is an assistive wearable device designed to aid visually impaired individuals in navigating their surroundings safely and independently. The system uses sensors to detect nearby obstacles and provides real-time feedback through vibrations or audio alerts.
 
-long duration;
-int distance;
+🔧 Features
+🔊 Obstacle Detection: Ultrasonic sensors detect obstacles and alert the user.
 
-void setup() {
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-  pinMode(motorPin, OUTPUT);
-  Serial.begin(9600);
-}
+🎧 Voice Assistance: Optional audio instructions using a speaker or Bluetooth earphones.
 
-void loop() {
-  // Trigger ultrasonic pulse
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
+⚡ Rechargeable Battery: Lightweight and rechargeable for daily use.
 
-  // Read echo time
-  duration = pulseIn(echoPin, HIGH);
+💡 Smart Navigation: Can be integrated with GPS for direction guidance (future scope).
 
-  // Convert to distance (in cm)
-  distance = duration * 0.034 / 2;
+🛠️ Technology Stack
+Arduino or Raspberry Pi
 
-  Serial.print("Distance: ");
-  Serial.print(distance);
-  Serial.println(" cm");
+Ultrasonic sensors
 
-  // Control vibration intensity using PWM (0-255)
-  if (distance <= 100) {
-    int intensity = map(distance, 100, 5, 0, 255); // Closer = stronger vibration
-    intensity = constrain(intensity, 0, 255);
-    analogWrite(motorPin, intensity);
+Buzzer / Vibration motor
 
-    // Print PWM intensity
-    Serial.print("PWM Intensity: ");
-    Serial.println(intensity);
-  } else {
-    analogWrite(motorPin, 0); // No vibration
-    Serial.println("PWM Intensity: 0");
-  }
+Audio module or Bluetooth
 
-  delay(100);
-}
+Battery and basic circuitry
+
+🌐 Applications
+Assistance for blind or visually impaired individuals
+
+Indoor and outdoor navigation support
+
+Integration with smart mobility aids
